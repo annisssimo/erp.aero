@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { authMiddleware } from '../../../src/middleware/auth';
 import { Token } from '../../../src/models/token';
 
-jest.mock('../../../src/models/Token');
+jest.mock('../../../src/models/token');
 
 function mockReqRes(authHeader?: string) {
   const req = { headers: { authorization: authHeader } } as unknown as Request;

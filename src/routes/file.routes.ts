@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import { fileService } from '../services/file.service';
 import { authMiddleware } from '../middleware/auth';
@@ -58,11 +58,13 @@ router.delete(
 
 router.get(
   '/download/:id',
-  asyncHandler(async (req: Request, res: Response) => {
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { filePath, name, mimeType } = await fileService.getFilePath(parseInt(req.params.id, 10));
     res.setHeader('Content-Disposition', `attachment; filename="${name}"`);
     res.setHeader('Content-Type', mimeType);
-    return res.sendFile(filePath);
+    res.sendFile(filePath, (err) => {
+      if (err) next(err);
+    });
   }),
 );
 

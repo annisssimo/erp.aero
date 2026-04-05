@@ -32,7 +32,17 @@ const validate = (req: Request<Record<string, string>, any, any>) => {
 router.post(
   '/signup',
   [
-    body('id').notEmpty().withMessage('id (phone or email) is required'),
+    body('id')
+      .notEmpty()
+      .withMessage('id (phone or email) is required')
+      .custom((value: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\+?[\d\s\-().]{7,20}$/;
+        if (!emailRegex.test(value) && !phoneRegex.test(value)) {
+          throw new Error('id must be a valid email or phone number');
+        }
+        return true;
+      }),
     body('password').isLength({ min: 6 }).withMessage('password min 6 chars'),
   ],
   asyncHandler(async (req: Request<Record<string, string>, unknown, SignupBody>, res: Response) => {

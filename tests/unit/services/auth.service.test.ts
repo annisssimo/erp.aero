@@ -4,8 +4,8 @@ import { AuthService } from '../../../src/services/auth.service';
 import { User } from '../../../src/models/user';
 import { Token } from '../../../src/models/token';
 
-jest.mock('../../../src/models/User');
-jest.mock('../../../src/models/Token');
+jest.mock('../../../src/models/user');
+jest.mock('../../../src/models/token');
 
 const service = new AuthService();
 
