@@ -86,15 +86,23 @@ JWT_REFRESH_EXPIRES=30d
 UPLOAD_DIR=uploads
 ```
 
-### 4. Запуск
+### 4. Миграции
 
 ```bash
-npm run dev      # tsx watch — без компиляции
-npm run build    # компилировать в dist/
-npm start        # запуск из dist/
+npm run db:migrate          # применить все миграции
+npm run db:migrate:undo     # откатить последнюю
+npm run db:migrate:undo:all # откатить все
 ```
 
-Sequelize создаёт таблицы автоматически при старте через `sequelize.sync()`.
+### 5. Запуск
+
+```bash
+npm run dev      # tsx watch — без компиляции, запускает миграции автоматически
+npm run build    # компилировать в dist/
+npm start        # запуск из dist/, запускает миграции автоматически
+```
+
+> В продакшне при старте сервер автоматически прогоняет непримененные миграции через `umzug`.
 
 ---
 
