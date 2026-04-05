@@ -1,4 +1,38 @@
+# Dependencies
 node_modules/
+
+# Environment & secrets
 .env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test / coverage
+coverage/
+.nyc_output/
+uploads_test/
+uploads_curl_test/
+
+# User uploads (keep folder in repo)
 uploads/*
 !uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
